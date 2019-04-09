@@ -1,3 +1,18 @@
+Fork with the option of setting different background images for each tab.
+
+
+## Usage
+
+Set environment `TERMINATOR_IMAGES_DIR` and start app:
+```
+TERMINATOR_IMAGES_DIR=/path/to/dir/with/images ./terminator
+```
+
+On the each new tab, a random background image from `TERMINATOR_IMAGES_DIR` directory will be setted
+
+## Description
+
+```
 Terminator
 by Chris Jones <cmsj@tenshu.net> and others.
 
@@ -45,3 +60,4 @@ I am thus licensing Terminator as GPL v2 only.
 Cristian Grada provided the old icon under the same licence.
 Cory Kontros provided the new icon under the CC-by-SA licence.
 For other authorship information, see debian/copyright
+```

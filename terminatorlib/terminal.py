@@ -14,6 +14,8 @@ import gobject
 import pango
 import subprocess
 import urllib
+import glob
+import random
 
 from util import dbg, err, gerr, spawn_new_terminator
 import util
@@ -105,6 +107,11 @@ class Terminal(gtk.VBox):
     palette_inactive = None
 
     composite_support = None
+    background_images_dir = os.getenv('TERMINATOR_IMAGES_DIR')
+    if background_images_dir:
+        images = glob.glob(background_images_dir + '/*')
+    else:
+        images = None
 
     cnxids = None
     targets_for_new_group = None
@@ -657,7 +664,10 @@ class Terminal(gtk.VBox):
 
         background_type = self.config['background_type']
         dbg('background_type=%s' % background_type)
-        if background_type == 'image' and \
+        if self.images:
+            self.vte.set_background_image_file(random.choice(self.images))
+            self.vte.set_scroll_background(self.config['scroll_background'])
+        elif background_type == 'image' and \
            self.config['background_image'] is not None and \
            self.config['background_image'] != '':
             self.vte.set_background_image_file(self.config['background_image'])
